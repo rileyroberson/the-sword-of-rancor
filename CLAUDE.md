@@ -1,6 +1,6 @@
 # THE SWORD OF RANCOR
 
-A young-adult/adult choose-your-own-adventure web game. Return a cursed blade to the Mines of the Maker before it consumes your soul.
+A young-adult/adult choose-your-own-adventure web game. Return a cursed blade to the Steward of the Sword before it consumes your soul.
 
 ## Tech Stack
 - Next.js 16 (App Router, static export)

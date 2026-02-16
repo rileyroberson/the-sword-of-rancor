@@ -83,7 +83,7 @@ export default function HomePage() {
         </h1>
         <p className="text-5xl mb-6">⚔️</p>
         <p className="text-muted mb-10 max-w-md mx-auto">
-          A cursed blade. A perilous journey. Return the sword to the Mines of the Maker
+          A cursed blade. A daunting journey. Return the sword to the Steward of the Sword
           before it consumes your soul.
         </p>
 

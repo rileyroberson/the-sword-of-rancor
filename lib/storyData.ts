@@ -8,7 +8,7 @@ export const storyNodes: Record<string, StoryNode> = {
   start: {
     id: "start",
     title: "The Mysterious Note",
-    narrative: `You return to your cottage after a long day's work to find a crumpled piece of parchment nailed to your door. The handwriting is shaky, as if written by a trembling hand:\n\n"To whoever finds this — I tried to carry it to the Mines of the Maker, but I was too weak. The Sword of Rancor lies beneath the old oak at the crossroads. It must be returned to the forge where it was made, or it will consume everything.\n\nDo not use it unless you must. Each time you draw the blade, it binds tighter to your soul.\n\n— A man who waited too long"\n\nYou walk to the crossroads. Beneath the oak, wrapped in rotting cloth, you find a sword of black iron with a faint purple glow. When your fingers touch the hilt, a cold hunger pulses through your arm.`,
+    narrative: `You return to your cottage after a long day's work to find a crumpled piece of parchment nailed to your door. The handwriting is shaky, as if written by a trembling hand:\n\n"To whoever finds this — I tried to carry it to the Steward of the Sword, but I was too weak. The Sword of Rancor lies beneath the old oak at the crossroads. It must be returned to the Steward, the only one who can contain its power.\n\nDo not use it unless you must. Each time you draw the blade, it binds tighter to your soul.\n\n— A man who waited too long"\n\nYou walk to the crossroads. Beneath the oak, wrapped in rotting cloth, you find a sword of black iron with a faint purple glow. When your fingers touch the hilt, a cold hunger pulses through your arm.`,
     choices: [
       {
         text: "Take the sword and accept the quest",
@@ -37,7 +37,7 @@ export const storyNodes: Record<string, StoryNode> = {
   mentor_01: {
     id: "mentor_01",
     title: "The Old Hermit",
-    narrative: `On the road north, you encounter a weathered old man sitting on a stone wall, whittling a walking stick. His eyes fix on the cloth-wrapped bundle at your side.\n\n"So you found it," he says quietly. "I've been waiting for someone fool enough — or brave enough — to carry it."\n\nHe introduces himself as Aldric, a former keeper of the Mines. He tells you the Mines of the Maker lie far to the north, past the Thornwood Forest, through the Barren Hills, and beyond the Sunken Pass.\n\n"The sword will whisper to you," he warns. "It wants to be used. Every creature you slay with it feeds the curse. Use it too freely, and you'll never let it go."\n\nHe gestures to his small camp. "I have a few things that might help. But nothing is free in these times."`,
+    narrative: `On the road north, you encounter a weathered old man sitting on a stone wall, whittling a walking stick. His eyes fix on the cloth-wrapped bundle at your side.\n\n"So you found it," he says quietly. "I've been waiting for someone fool enough — or brave enough — to carry it."\n\nHe introduces himself as Aldric, a former servant of the Steward. He tells you the Steward of the Sword dwells far to the north, past the Thornwood Forest, through the Barren Hills, and beyond the Sunken Pass.\n\n"The sword will whisper to you," he warns. "It wants to be used. Every creature you slay with it feeds the curse. Use it too freely, and you'll never let it go."\n\nHe gestures to his small camp. "I have a few things that might help. But nothing is free in these times."`,
     choices: [
       {
         text: "Buy a health potion (30 coins)",
@@ -516,10 +516,10 @@ export const storyNodes: Record<string, StoryNode> = {
         itemsGained: [{ id: "health_potion", name: "Health Potion", description: "Restores 30 HP", emoji: "🧪", quantity: 1, consumable: true }],
       },
       {
-        text: "Ask Gareth more about the Mines of the Maker",
+        text: "Ask Gareth more about the Steward of the Sword",
         preview: "Local knowledge is valuable.",
         nextNodeId: "bridge_guardian",
-        itemsGained: [{ id: "mine_map", name: "Rough Map", description: "Sketch of the mines entrance", emoji: "🗺️", quantity: 1, consumable: false }],
+        itemsGained: [{ id: "mine_map", name: "Rough Map", description: "Sketch of the Steward's keep", emoji: "🗺️", quantity: 1, consumable: false }],
       },
       {
         text: "Leave immediately — every moment counts",
@@ -575,7 +575,7 @@ export const storyNodes: Record<string, StoryNode> = {
         healthChange: -10,
       },
       {
-        text: "Ask the eagle about the Mines of the Maker",
+        text: "Ask the eagle about the Steward of the Sword",
         preview: "A creature this old must know things.",
         nextNodeId: "bridge_guardian",
         itemsGained: [{ id: "eagle_feather", name: "Eagle Feather", description: "Gift from the Great Eagle", emoji: "🪶", quantity: 1, consumable: false }],
@@ -586,8 +586,8 @@ export const storyNodes: Record<string, StoryNode> = {
         nextNodeId: "bridge_guardian",
       },
       {
-        text: "Ask the eagle to destroy the sword",
-        preview: "Maybe there's an easier solution.",
+        text: "Ask the eagle to take the sword to the Steward",
+        preview: "Maybe the eagle could deliver it.",
         nextNodeId: "bridge_guardian",
       },
     ],
@@ -842,31 +842,31 @@ export const storyNodes: Record<string, StoryNode> = {
   wizard_reward: {
     id: "wizard_reward",
     title: "The Wizard's Gift",
-    narrative: `Theron smiles — a warm, genuine smile. "Good. The sword hasn't taken your heart yet."\n\nHe reaches into his robes and produces a small glass vial filled with golden light. "Maker's Oil. Pour this on the sword before you place it in the forge, and the unmake will be clean and complete."\n\nHe pauses. "Without it, the sword might resist. The forge is old, and it may not be strong enough alone anymore."\n\nHe steps aside and gestures to the road ahead. "The Mines are close now. Two more valleys and a climb. Be careful — the land near the Mines draws dark things."`,
+    narrative: `Theron smiles — a warm, genuine smile. "Good. The sword hasn't taken your heart yet."\n\nHe reaches into his robes and produces a small wax disc stamped with an ancient sigil. "The Steward's Seal. Show this to the Steward of the Sword, and he will know you come in good faith. Without it, he may not trust you — and the handoff will be far more difficult."\n\nHe pauses. "The Steward is the only one who can contain the blade's power. He has guarded cursed weapons for centuries."\n\nHe steps aside and gestures to the road ahead. "The Steward's keep is close now. Two more valleys and a climb. Be careful — the land near his stronghold draws dark things."`,
     choices: [
       {
-        text: "Take the oil and thank him",
+        text: "Take the seal and thank him",
         preview: "This could be essential.",
         nextNodeId: "approach_01",
-        itemsGained: [{ id: "makers_oil", name: "Maker's Oil", description: "Helps unmake the sword in the forge", emoji: "✨", quantity: 1, consumable: true }],
+        itemsGained: [{ id: "stewards_seal", name: "Steward's Seal", description: "Proves your identity to the Steward", emoji: "✨", quantity: 1, consumable: true }],
       },
       {
         text: "Ask Theron to come with you",
         preview: "A wizard ally would help.",
         nextNodeId: "approach_01",
-        itemsGained: [{ id: "makers_oil", name: "Maker's Oil", description: "Helps unmake the sword in the forge", emoji: "✨", quantity: 1, consumable: true }],
+        itemsGained: [{ id: "stewards_seal", name: "Steward's Seal", description: "Proves your identity to the Steward", emoji: "✨", quantity: 1, consumable: true }],
       },
       {
-        text: "Ask about the dark things near the Mines",
+        text: "Ask about the dark things near the Steward's keep",
         preview: "Know your enemy.",
         nextNodeId: "approach_01",
         itemsGained: [
-          { id: "makers_oil", name: "Maker's Oil", description: "Helps unmake the sword in the forge", emoji: "✨", quantity: 1, consumable: true },
-          { id: "mine_map", name: "Rough Map", description: "Sketch of the mines entrance", emoji: "🗺️", quantity: 1, consumable: false },
+          { id: "stewards_seal", name: "Steward's Seal", description: "Proves your identity to the Steward", emoji: "✨", quantity: 1, consumable: true },
+          { id: "mine_map", name: "Rough Map", description: "Sketch of the Steward's keep", emoji: "🗺️", quantity: 1, consumable: false },
         ],
       },
       {
-        text: "Refuse the oil — you'll manage without it",
+        text: "Refuse the seal — you'll manage without it",
         preview: "You don't trust wizard gifts.",
         nextNodeId: "approach_01",
       },
@@ -935,13 +935,13 @@ export const storyNodes: Record<string, StoryNode> = {
   },
 
   // ============================================================
-  // ACT III: Approach to the Mines
+  // ACT III: Approach to the Steward's Keep
   // ============================================================
 
   approach_01: {
     id: "approach_01",
     title: "The Shadow Valley",
-    narrative: `The road descends into a valley perpetually in shadow. The air is thick and cold. Twisted trees grow at odd angles, as if recoiling from something.\n\nThe Sword of Rancor is restless now — you can feel it pulling toward the north, toward the Mines. It knows it's close to home. And it doesn't want to go back.\n\nA band of armed bandits blocks the road ahead — six rough-looking men and women with crossbows trained on you.\n\n"Drop your valuables," their leader calls. "Especially that fancy sword."`,
+    narrative: `The road descends into a valley perpetually in shadow. The air is thick and cold. Twisted trees grow at odd angles, as if recoiling from something.\n\nThe Sword of Rancor is restless now — you can feel it pulling toward the north, toward the Steward's keep. It knows what awaits there. And it doesn't want to go.\n\nA band of armed bandits blocks the road ahead — six rough-looking men and women with crossbows trained on you.\n\n"Drop your valuables," their leader calls. "Especially that fancy sword."`,
     choices: [
       {
         text: "Draw the Sword of Rancor",
@@ -982,7 +982,7 @@ export const storyNodes: Record<string, StoryNode> = {
   approach_02: {
     id: "approach_02",
     title: "The Chasm of Echoes",
-    narrative: `The valley ends at a massive chasm. The only way across is a crumbling rope bridge that sways in the wind — or a path down into the chasm itself, which would add hours.\n\nAcross the chasm, you can see the entrance to the Mines of the Maker: a great stone doorway carved into the mountainside, flanked by two enormous iron statues of smiths at their anvils.\n\nThe bridge looks like it could hold your weight. Probably. The ropes creak ominously.\n\nBelow, in the chasm, you hear something large moving.`,
+    narrative: `The valley ends at a massive chasm. The only way across is a crumbling rope bridge that sways in the wind — or a path down into the chasm itself, which would add hours.\n\nAcross the chasm, you can see a great stone fortress built into the mountainside — the Steward's keep. Torchlight flickers in narrow windows. Two weathered statues of armored wardens flank the entrance.\n\nThe bridge looks like it could hold your weight. Probably. The ropes creak ominously.\n\nBelow, in the chasm, you hear something large moving.`,
     choices: [
       {
         text: "Cross the rope bridge carefully",
@@ -1047,13 +1047,13 @@ export const storyNodes: Record<string, StoryNode> = {
   },
 
   // ============================================================
-  // ACT III: The Mines of the Maker
+  // ACT III: The Steward's Keep
   // ============================================================
 
   mines_entrance: {
     id: "mines_entrance",
-    title: "The Mines of the Maker",
-    narrative: `You stand before the great stone doorway. The iron statues loom above you, their hammers raised eternally. Ancient runes are carved into the lintel:\n\n"What was made here shall be unmade. What was broken here shall be reforged."\n\nThe entrance is sealed by a heavy iron door — but it has a keyhole. A silver keyhole.\n\nBeyond the door, if you can open it, lies the forge where the Sword of Rancor was first created. Where it can finally be destroyed.\n\nThe sword is vibrating now, humming with energy. It knows.`,
+    title: "The Steward's Keep",
+    narrative: `You stand before the great stone fortress. The weathered statues of wardens loom above you, swords crossed over the entrance. Ancient runes are carved into the lintel:\n\n"What is carried here shall be kept. What is surrendered here shall be contained."\n\nThe entrance is sealed by a heavy iron door — but it has a keyhole. A silver keyhole.\n\nBeyond the door, if you can open it, dwells the Steward of the Sword — the only one who can take the blade from you and contain its power.\n\nThe sword is vibrating now, humming with energy. It knows.`,
     choices: [
       {
         text: "Use the silver key",
@@ -1069,14 +1069,14 @@ export const storyNodes: Record<string, StoryNode> = {
       },
       {
         text: "Use the Sword of Rancor to cut through",
-        preview: "The sword that was made here can unmake the door.",
+        preview: "The cursed blade against an ancient door.",
         nextNodeId: "mines_forge",
         usesSword: true,
         isHighRisk: true,
       },
       {
-        text: "Search for another entrance",
-        preview: "Mines usually have ventilation shafts.",
+        text: "Search for another way in",
+        preview: "There may be a side passage.",
         nextNodeId: "mines_forge",
         healthChange: -10,
         requiresItem: "rope",
@@ -1086,30 +1086,30 @@ export const storyNodes: Record<string, StoryNode> = {
 
   mines_forge: {
     id: "mines_forge",
-    title: "The Ancient Forge",
-    narrative: `The forge is a cathedral of stone and iron. A massive anvil sits at the center, and behind it, the forge itself — cold for centuries, but you can feel latent heat in the stones, as if the mountain itself remembers the fire.\n\nThe Sword of Rancor screams. Not in sound, but in feeling — pure resistance coursing through your arm. It doesn't want to be placed in the forge. It wants to stay with you.\n\nYour hand tightens on the hilt involuntarily. The purple glow is blinding now.\n\nThis is the final moment. But the forge needs to be lit first.`,
+    title: "The Steward's Chamber",
+    narrative: `The chamber is vast and ancient. Stone pillars rise into shadow. At the far end, seated on a plain stone chair, is an old man in gray robes — the Steward of the Sword. His eyes burn with quiet power.\n\n"So," he says, rising slowly. "Another bearer. You've come a long way."\n\nThe Sword of Rancor screams. Not in sound, but in feeling — pure resistance coursing through your arm. It doesn't want to be surrendered. It wants to stay with you.\n\nYour hand tightens on the hilt involuntarily. The purple glow is blinding now.\n\nThe Steward extends his hand. "Give me the blade. But I must know you come willingly."`,
     choices: [
       {
-        text: "Pour the Maker's Oil onto the forge and light it",
+        text: "Present the Steward's Seal",
         preview: "The wizard said this was the key.",
         nextNodeId: "finale_oil",
-        requiresItem: "makers_oil",
+        requiresItem: "stewards_seal",
       },
       {
-        text: "Use your torch to light the forge",
-        preview: "Fire is fire.",
+        text: "Offer the sword by torchlight as a sign of peace",
+        preview: "Light against darkness.",
         nextNodeId: "finale_torch",
         requiresItem: "torch",
       },
       {
-        text: "Use the eagle feather to invoke the forge's magic",
-        preview: "A gift from a creature older than the mines.",
+        text: "Present the eagle feather as proof of your journey",
+        preview: "A gift from a creature the Steward may know.",
         nextNodeId: "finale_feather",
         requiresItem: "eagle_feather",
       },
       {
-        text: "Strike the anvil with the sword",
-        preview: "Force it to shatter against what created it.",
+        text: "Try to force the sword from your own grip",
+        preview: "Willpower alone. This will hurt.",
         nextNodeId: "finale_force",
         usesSword: true,
         isHighRisk: true,
@@ -1123,8 +1123,8 @@ export const storyNodes: Record<string, StoryNode> = {
 
   finale_oil: {
     id: "finale_oil",
-    title: "The Unmaking",
-    narrative: `The Maker's Oil ignites with golden fire. The forge roars to life — not with ordinary flame, but with the original fire that forged the sword centuries ago.\n\nThe sword fights you. Your muscles burn. Your hand feels fused to the hilt. But you remember Theron's words, and with a cry of defiance, you thrust the blade into the forge's heart.\n\nThe sword screams — a real sound this time, metal tearing and something ancient dying. Purple light explodes outward, and then... silence.\n\nThe pieces of the sword melt into the forge, returning to the raw metal from which they were born. The curse lifts from your shoulders like a physical weight.\n\nYou stand in the quiet of the Mines, breathing freely for the first time since you touched the blade. The forge dims to warm embers.\n\nYou did it. The Sword of Rancor is no more.\n\nAs you walk out of the Mines and into the sunlight, the world feels new. Clean. The iron statues at the entrance seem to bow their heads in thanks.\n\nYou're a hero. And you're free.`,
+    title: "The Steward Accepts",
+    narrative: `You hold out the wax seal. The Steward's eyes widen — then soften. "Theron sent you. I know that mark well."\n\nHe takes the seal, examines it, and nods. "You've carried the blade with honor. Few make it this far with their will intact."\n\nHe extends both hands. The sword fights you — your muscles burn, your hand feels fused to the hilt. But the Steward speaks a word in a language older than the mountains, and the blade goes still.\n\nYou release it. The purple glow fades as the Steward wraps the sword in enchanted cloth and places it in a vault behind his chair — a vault filled with dozens of other cursed weapons, each sealed and silent.\n\n"It will trouble no one again," he says. "Not while I draw breath, nor my successor after me."\n\nThe curse lifts from your shoulders like a physical weight. You breathe freely for the first time since you touched the blade.\n\nAs you walk out of the keep and into the sunlight, the world feels new. Clean.\n\nYou're a hero. And you're free.`,
     isEnding: true,
     endingType: "win",
     choices: [],
@@ -1132,8 +1132,8 @@ export const storyNodes: Record<string, StoryNode> = {
 
   finale_torch: {
     id: "finale_torch",
-    title: "A Flickering Victory",
-    narrative: `You thrust your torch into the forge. The ancient coals catch slowly, reluctantly. The fire is weak — not the roaring inferno of the Maker's original flame, but it's enough.\n\nThe sword resists with everything it has. Your arm shakes, sweat pours down your face, and for a terrible moment you think it will win. But you grit your teeth and shove the blade into the flames.\n\nIt takes longer than it should. The sword doesn't shatter cleanly — it melts, slowly, screaming all the while. But it melts.\n\nWhen it's over, you collapse beside the forge, exhausted and burned. The curse fades slowly, like poison leaving your blood.\n\nYou rest in the Mines for a long time before you have the strength to leave. But when you finally walk into the daylight, you know: the Sword of Rancor is gone.\n\nIt wasn't perfect. It wasn't easy. But you did it.`,
+    title: "A Hard-Won Trust",
+    narrative: `You raise the torch — not as a weapon, but as an offering of light. The Steward watches, his expression unreadable.\n\n"No seal," he says. "No proof. Just a torch and a stranger."\n\nBut he studies your face for a long time. The sword resists with everything it has — your arm shakes, sweat pours down your face. The Steward sees the struggle.\n\n"You're fighting it," he says quietly. "That's proof enough."\n\nHe reaches out and grips the blade with bare hands. You expect it to cut him, but it doesn't — his hands glow with a faint silver light. The sword goes limp. Dead. You release the hilt and stagger backward.\n\nThe Steward carries the blade to his vault and seals it away with the others.\n\n"It took courage to come here without the seal," he says. "Most don't make it."\n\nYou collapse in the Steward's hall, exhausted but free. The curse fades slowly, like poison leaving your blood.\n\nIt wasn't perfect. It wasn't easy. But you did it.`,
     isEnding: true,
     endingType: "win",
     choices: [],
@@ -1141,8 +1141,8 @@ export const storyNodes: Record<string, StoryNode> = {
 
   finale_feather: {
     id: "finale_feather",
-    title: "Wings of Light",
-    narrative: `You place the eagle's feather on the forge and it ignites with pure white flame — the fire of the sky, older even than the Maker's forge. The great eagle knew. It gave you exactly what you needed.\n\nThe sword barely fights. Against this ancient fire, its curse is a candle against the sun. You place the blade in the white flames and it dissolves into motes of light that drift upward through the mine shafts and into the sky.\n\nFor a moment, you hear the eagle cry somewhere high above — a sound of triumph.\n\nThe forge dims. The curse is gone. Not just broken — purified. The evil that lived in the sword has been burned away entirely.\n\nYou walk from the mines lighter than you've ever felt. Above you, the great eagle circles once, twice, then soars north and vanishes into the clouds.\n\nThe best ending you could have hoped for.`,
+    title: "Wings of Recognition",
+    narrative: `You hold out the eagle's feather. The Steward freezes — then a rare smile crosses his weathered face.\n\n"The Great Eagle," he breathes. "It still watches the roads." He takes the feather and holds it to the light. "This creature has guarded these lands longer than I have. If it trusted you with this, then I trust you completely."\n\nHe extends his hands for the sword. The blade barely resists — as if the eagle's blessing has already weakened its hold on you. You release it easily, almost gently.\n\nThe Steward wraps the blade with practiced care and carries it to his vault. As the vault door closes, you hear the eagle cry somewhere high above — a sound of triumph.\n\n"You've done a remarkable thing," the Steward says. "Go in peace."\n\nYou walk from the keep lighter than you've ever felt. Above you, the great eagle circles once, twice, then soars north and vanishes into the clouds.\n\nThe best ending you could have hoped for.`,
     isEnding: true,
     endingType: "win",
     choices: [],
@@ -1150,8 +1150,8 @@ export const storyNodes: Record<string, StoryNode> = {
 
   finale_force: {
     id: "finale_force",
-    title: "Shattered",
-    narrative: `You raise the Sword of Rancor above your head and bring it down on the anvil with all your strength.\n\nThe impact is catastrophic. A shockwave of purple energy blasts through the forge. The sword cracks — but so does something inside you. The final surge of rancor courses through your veins like fire.\n\nThe sword shatters into a thousand pieces. The curse shatters with it. But the cost...\n\nYou lie on the cold stone floor, barely conscious. The purple glow fades from the shards around you. It's over. The sword is destroyed.\n\nBut you can feel the echoes of its power in your bones. They'll fade, eventually. You hope.\n\nYou drag yourself from the mines, wounded and changed, but alive. The sword is gone. That's what matters.`,
+    title: "Torn Free",
+    narrative: `You grip the sword with both hands and try to wrench it away from yourself. The blade fights back — a surge of purple energy courses through your arms, your chest, your skull.\n\nYou scream. The Steward rushes forward, speaking words of power, his hands glowing silver. Together — your willpower and his ancient magic — you force the sword from your grip.\n\nIt clatters to the stone floor, still glowing, still hungry. But it's no longer yours.\n\nThe Steward scoops it up before it can reach for you again, wrapping it in enchanted cloth with practiced speed. The vault door slams shut.\n\nYou lie on the cold stone floor, barely conscious. The purple glow fades from your veins. It's over.\n\nBut you can feel the echoes of its power in your bones. They'll fade, eventually. You hope.\n\nThe Steward helps you to your feet. "You have more courage than sense," he says. "But you're alive. And the blade is contained."\n\nYou walk from the keep wounded and changed, but free. The sword is the Steward's burden now.`,
     isEnding: true,
     endingType: "win",
     choices: [],
@@ -1174,7 +1174,7 @@ export const storyNodes: Record<string, StoryNode> = {
   lose_corrupted: {
     id: "lose_corrupted",
     title: "The Price of Greed",
-    narrative: `You take the sword to sell. But the moment you enter the market, the blade whispers. You draw it to show a buyer, and the purple light fills your eyes.\n\nYou never make it to the merchant's stall. The sword takes you instead. By nightfall, you're walking north — not to the Mines, but away from them. The sword has a new bearer, and it has no intention of being destroyed.\n\nYou are the sword's creature now.`,
+    narrative: `You take the sword to sell. But the moment you enter the market, the blade whispers. You draw it to show a buyer, and the purple light fills your eyes.\n\nYou never make it to the merchant's stall. The sword takes you instead. By nightfall, you're walking north — away from the Steward, away from anyone who could help. The sword has a new bearer, and it has no intention of being surrendered.\n\nYou are the sword's creature now.`,
     isEnding: true,
     endingType: "lose",
     loseReason: "Greed led to corruption.",
@@ -1184,7 +1184,7 @@ export const storyNodes: Record<string, StoryNode> = {
   lose_lost_backtrack: {
     id: "lose_lost_backtrack",
     title: "Time Runs Out",
-    narrative: `You follow the merchant's footprints back toward the village, but the trail goes cold. You spend hours searching, then days.\n\nBy the time you give up and try to resume your quest, the sword has grown impatient. Its pull is stronger now, its whispers louder. You feel the curse tightening around you.\n\nYou never make it to the Mines. The sword consumes you on a lonely road, far from anyone who might have helped. Another failed bearer added to its long history.`,
+    narrative: `You follow the merchant's footprints back toward the village, but the trail goes cold. You spend hours searching, then days.\n\nBy the time you give up and try to resume your quest, the sword has grown impatient. Its pull is stronger now, its whispers louder. You feel the curse tightening around you.\n\nYou never make it to the Steward. The sword consumes you on a lonely road, far from anyone who might have helped. Another failed bearer added to its long history.`,
     isEnding: true,
     endingType: "lose",
     loseReason: "You lost too much time and the curse overtook you.",
@@ -1248,7 +1248,7 @@ export const storyNodes: Record<string, StoryNode> = {
   lose_health: {
     id: "lose_health",
     title: "Fallen on the Road",
-    narrative: `Your body finally gives out. Too many wounds, too little rest, too many battles fought with flesh instead of cursed steel.\n\nYou collapse on the road, the Mines of the Maker somewhere ahead — close, maybe, but it doesn't matter now. Your vision dims.\n\nThe Sword of Rancor slips from your pack and lands in the dirt beside you, its purple glow steady and patient. It will wait. Someone else will come along. Someone else always does.\n\nYour quest ends here, in the dust and the silence. So close. Not close enough.`,
+    narrative: `Your body finally gives out. Too many wounds, too little rest, too many battles fought with flesh instead of cursed steel.\n\nYou collapse on the road, the Steward's keep somewhere ahead — close, maybe, but it doesn't matter now. Your vision dims.\n\nThe Sword of Rancor slips from your pack and lands in the dirt beside you, its purple glow steady and patient. It will wait. Someone else will come along. Someone else always does.\n\nYour quest ends here, in the dust and the silence. So close. Not close enough.`,
     isEnding: true,
     endingType: "lose",
     loseReason: "Your health was depleted.",
