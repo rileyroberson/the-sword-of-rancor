@@ -1,0 +1,9 @@
+export const SWORD_RANCOR_PER_USE = 15;
+export const STARTING_HEALTH = 100;
+export const STARTING_MONEY = 50;
+export const MAX_HEALTH = 100;
+export const MAX_RANCOR = 100;
+export const HEALTH_POTION_HEAL = 30;
+export const MAX_LEADERBOARD_ENTRIES = 50;
+export const MIN_NAME_LENGTH = 2;
+export const MAX_NAME_LENGTH = 20;
