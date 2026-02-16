@@ -11,17 +11,24 @@ function formatTime(ms: number): string {
 
 interface LeaderboardProps {
   entries: LeaderboardEntry[];
+  loading?: boolean;
   onClose: () => void;
 }
 
-export default function Leaderboard({ entries, onClose }: LeaderboardProps) {
+export default function Leaderboard({ entries, loading, onClose }: LeaderboardProps) {
   return (
     <div className="mx-auto max-w-2xl px-4 py-12 animate-fade-in">
       <h1 className="font-[family-name:var(--font-family-title)] text-xl text-cyan glow-cyan text-center mb-8">
         LEADERBOARD
       </h1>
 
-      {entries.length === 0 ? (
+      {loading ? (
+        <div className="text-center py-12">
+          <span className="font-[family-name:var(--font-family-title)] text-cyan text-sm animate-pulse">
+            Loading...
+          </span>
+        </div>
+      ) : entries.length === 0 ? (
         <div className="text-center text-muted py-12">
           <p className="text-4xl mb-4">🏆</p>
           <p className="font-[family-name:var(--font-family-title)] text-xs">

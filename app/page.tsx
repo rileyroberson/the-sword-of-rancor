@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { isNameAppropriate } from "../lib/nameFilter";
 import { initializeGame } from "../lib/gameState";
@@ -17,6 +17,8 @@ export default function HomePage() {
   const [view, setView] = useState<"home" | "leaderboard">("home");
   const [mounted, setMounted] = useState(false);
   const [checking, setChecking] = useState(false);
+  const [leaderboardEntries, setLeaderboardEntries] = useState<import("../lib/types").LeaderboardEntry[]>([]);
+  const [loadingLeaderboard, setLoadingLeaderboard] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -58,6 +60,14 @@ export default function HomePage() {
     setSavedName("");
   };
 
+  const handleShowLeaderboard = useCallback(async () => {
+    setLoadingLeaderboard(true);
+    setView("leaderboard");
+    const entries = await getLeaderboard();
+    setLeaderboardEntries(entries);
+    setLoadingLeaderboard(false);
+  }, []);
+
   if (!mounted) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -69,7 +79,7 @@ export default function HomePage() {
   }
 
   if (view === "leaderboard") {
-    return <Leaderboard entries={getLeaderboard()} onClose={() => setView("home")} />;
+    return <Leaderboard entries={leaderboardEntries} loading={loadingLeaderboard} onClose={() => setView("home")} />;
   }
 
   return (
@@ -136,7 +146,7 @@ export default function HomePage() {
 
         <button
           className="font-[family-name:var(--font-family-title)] text-[10px] text-muted hover:text-cyan transition-colors"
-          onClick={() => setView("leaderboard")}
+          onClick={handleShowLeaderboard}
         >
           🏆 Leaderboard
         </button>

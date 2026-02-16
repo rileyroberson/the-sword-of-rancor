@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { GameState } from "../lib/types";
+import { GameState, LeaderboardEntry } from "../lib/types";
 import { getStoryNode } from "../lib/storyData";
 import { applyChoiceEffects, canSelectChoice } from "../lib/gameState";
 import { saveGame, loadGame, deleteSave } from "../lib/storage";
@@ -17,6 +17,8 @@ export default function StoryPageClient({ nodeId }: { nodeId: string }) {
   const [state, setState] = useState<GameState | null>(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [endingRecorded, setEndingRecorded] = useState(false);
+  const [leaderboardEntries, setLeaderboardEntries] = useState<LeaderboardEntry[]>([]);
+  const [loadingLeaderboard, setLoadingLeaderboard] = useState(false);
 
   useEffect(() => {
     const save = loadGame();
@@ -27,6 +29,16 @@ export default function StoryPageClient({ nodeId }: { nodeId: string }) {
       router.push("/");
     }
   }, [nodeId, router]);
+
+  // Disable browser back button during gameplay
+  useEffect(() => {
+    window.history.pushState(null, "", window.location.href);
+    const handlePopState = () => {
+      window.history.pushState(null, "", window.location.href);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   const handleChoice = useCallback(
     (choiceIndex: number) => {
@@ -41,7 +53,6 @@ export default function StoryPageClient({ nodeId }: { nodeId: string }) {
 
       const newState = applyChoiceEffects(state, choice);
 
-      // Check for auto-loss from rancor/health
       const nextNode = getStoryNode(newState.currentNodeId);
       let redirectNodeId = newState.currentNodeId;
 
@@ -68,6 +79,26 @@ export default function StoryPageClient({ nodeId }: { nodeId: string }) {
     deleteSave();
     router.push("/");
   }, [router]);
+
+  // Record ending to Supabase
+  useEffect(() => {
+    if (!state || endingRecorded) return;
+    const node = getStoryNode(nodeId);
+    if (!node?.isEnding) return;
+
+    const won = node.endingType === "win";
+    const entry = buildLeaderboardEntry(state, won);
+    setEndingRecorded(true);
+    addLeaderboardEntry(entry);
+  }, [state, nodeId, endingRecorded]);
+
+  const handleShowLeaderboard = useCallback(async () => {
+    setLoadingLeaderboard(true);
+    setShowLeaderboard(true);
+    const entries = await getLeaderboard();
+    setLeaderboardEntries(entries);
+    setLoadingLeaderboard(false);
+  }, []);
 
   if (!state) {
     return (
@@ -96,17 +127,11 @@ export default function StoryPageClient({ nodeId }: { nodeId: string }) {
 
   // Ending screen
   if (node.isEnding) {
-    if (!endingRecorded) {
-      const won = node.endingType === "win";
-      const entry = buildLeaderboardEntry(state, won);
-      addLeaderboardEntry(entry);
-      setEndingRecorded(true);
-    }
-
     if (showLeaderboard) {
       return (
         <Leaderboard
-          entries={getLeaderboard()}
+          entries={leaderboardEntries}
+          loading={loadingLeaderboard}
           onClose={() => setShowLeaderboard(false)}
         />
       );
@@ -119,7 +144,7 @@ export default function StoryPageClient({ nodeId }: { nodeId: string }) {
         node={node}
         entry={entry}
         onRestart={handleRestart}
-        onLeaderboard={() => setShowLeaderboard(true)}
+        onLeaderboard={handleShowLeaderboard}
       />
     );
   }
@@ -129,7 +154,6 @@ export default function StoryPageClient({ nodeId }: { nodeId: string }) {
       <GameHUD state={state} />
 
       <main className="flex-1 mx-auto max-w-3xl px-4 py-8 animate-fade-in">
-        {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <span className="font-[family-name:var(--font-family-title)] text-[10px] text-muted">
             {state.playerName}
@@ -142,19 +166,16 @@ export default function StoryPageClient({ nodeId }: { nodeId: string }) {
           </button>
         </div>
 
-        {/* Title */}
         <h1 className="font-[family-name:var(--font-family-title)] text-lg md:text-xl text-cyan glow-cyan mb-6">
           {node.title}
         </h1>
 
-        {/* Narrative */}
         <div className="bg-surface/60 rounded-lg p-6 mb-8 border border-surface-light">
           <p className="whitespace-pre-line leading-relaxed text-text">
             {node.narrative}
           </p>
         </div>
 
-        {/* Choices */}
         <div className="mb-4">
           <h2 className="font-[family-name:var(--font-family-title)] text-xs text-muted mb-4">
             What do you do?

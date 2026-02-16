@@ -1,29 +1,43 @@
 import { LeaderboardEntry, GameState } from "./types";
 import { MAX_LEADERBOARD_ENTRIES } from "./constants";
+import { supabase } from "./supabase";
 
-const LEADERBOARD_KEY = "sword-of-rancor-leaderboard";
+export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
+  const { data, error } = await supabase
+    .from("SoR_Leaderboard")
+    .select("*")
+    .order("won", { ascending: false })
+    .order("completion_time", { ascending: true })
+    .limit(MAX_LEADERBOARD_ENTRIES);
 
-export function getLeaderboard(): LeaderboardEntry[] {
-  if (typeof window === "undefined") return [];
-  const data = localStorage.getItem(LEADERBOARD_KEY);
-  if (!data) return [];
-  try {
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
+  if (error || !data) return [];
+
+  return data.map((row) => ({
+    playerName: row.player_name,
+    completionTime: row.completion_time,
+    enemiesDefeated: row.enemies_defeated,
+    moneyEarned: row.money_earned,
+    itemsCollected: row.items_collected,
+    finalRancorLevel: row.final_rancor,
+    finalHealthLevel: row.final_health,
+    won: row.won,
+    timestamp: new Date(row.created_at).getTime(),
+    endingReached: row.ending_reached,
+  }));
 }
 
-export function addLeaderboardEntry(entry: LeaderboardEntry): void {
-  if (typeof window === "undefined") return;
-  const leaderboard = getLeaderboard();
-  leaderboard.push(entry);
-  leaderboard.sort((a, b) => {
-    if (a.won !== b.won) return a.won ? -1 : 1;
-    return a.completionTime - b.completionTime;
+export async function addLeaderboardEntry(entry: LeaderboardEntry): Promise<void> {
+  await supabase.from("SoR_Leaderboard").insert({
+    player_name: entry.playerName,
+    won: entry.won,
+    completion_time: entry.completionTime,
+    enemies_defeated: entry.enemiesDefeated,
+    money_earned: entry.moneyEarned,
+    items_collected: entry.itemsCollected,
+    final_rancor: entry.finalRancorLevel,
+    final_health: entry.finalHealthLevel,
+    ending_reached: entry.endingReached,
   });
-  const trimmed = leaderboard.slice(0, MAX_LEADERBOARD_ENTRIES);
-  localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(trimmed));
 }
 
 export function buildLeaderboardEntry(state: GameState, won: boolean): LeaderboardEntry {
