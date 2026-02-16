@@ -7,6 +7,7 @@ export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
     .from("SoR_Leaderboard")
     .select("*")
     .order("won", { ascending: false })
+    .order("enemies_defeated", { ascending: false })
     .order("completion_time", { ascending: true })
     .limit(MAX_LEADERBOARD_ENTRIES);
 
